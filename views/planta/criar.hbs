@@ -1,0 +1,22 @@
+<form action="/planta/store" method="POST" enctype="multipart/form-data">
+  <label for="nomeCientifico">Nome Científico:</label><br>
+  <input type="text" id="nomeCientifico" name="nomeCientifico" required><br><br>
+
+  <label for="nomeComum">Nome Comum:</label><br>
+  <input type="text" id="nomeComum" name="nomeComum" required><br><br>
+
+  <fieldset>
+    <legend>Guia</legend>
+
+    <label for="guiaTexto">Escrever guia:</label><br>
+    <textarea id="guiaTexto" name="guiaTexto" rows="5" cols="40" placeholder="Digite o conteúdo do guia aqui..."></textarea><br><br>
+
+    <label for="guiaArquivo">Ou enviar arquivo (.txt):</label><br>
+    <input type="file" id="guiaArquivo" name="guiaArquivo" accept=".txt"><br>
+  </fieldset><br>
+
+  <label for="foto">Foto:</label><br>
+  <input type="file" id="foto" name="foto" accept="image/*" required><br><br>
+
+  <button type="submit">Salvar</button>
+</form>

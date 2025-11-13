@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        {{ title }}
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    {{#if user}}
+    <p> {{user.nome}}</p>
+    <img alt="Foto de {{ user.nome }}" src="{{ user.foto }}"></img>
+    <p>{{user.id}}</p>
+    {{else}}
+    <p>sem user</p>
+    {{/if}}
+</body>
+
+</html>

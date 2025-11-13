@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+ <meta charset="UTF-8">
+ <title>Banco de dados com NodeJS e Express</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+ <link rel="stylesheet"
+ href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awes
+ ome.min.css">
+ 
+ <body>
+ <div class="container"> {{#if mensagem }} <h3 class='text-danger'> {{ mensagem }}</h3> {{/if}}
+ <form action="/login" method="POST">
+ <div class="form-group"> <label for="usr">Email:</label>
+ <input type="Email" class="form-control" name="email">
+ </div>
+ <div class="form-group"> <label for="pwd">Senha:</label>
+ <input type="password" class="form-control" name="senha">
+ </div>
+ <button type="submit" class="btn btn-primary">Enviar</button>
+ </form>
+ <a href="/auth/google" class="btn btn-danger">
+    <span class="fa fa-google"></span> Login com a conta Google
+    </a>
+ </div>
+</body>
+</html>
