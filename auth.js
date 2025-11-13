@@ -30,6 +30,7 @@ module.exports = function (passport) {
             
         }
     ));
+    //fodase
     async function findUser(email) {
         let dadosBanco = await Usuario.findAll({
             where: {
