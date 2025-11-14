@@ -62,7 +62,7 @@ user.id: {{../user.id}}
 
                         <!-- LIKE BUTTON -->
                         <div class="my-2">
-                            {{#if this.hasLiked}}
+                            {{#if this.isCurtido}}
                             <a href="/curtida/remover/{{this.id}}" class="btn btn-sm"
                                 style="color: #ff7373; font-size: 1.3rem;">
                                 ♥
@@ -75,7 +75,7 @@ user.id: {{../user.id}}
                             {{/if}}
 
                             <span style="font-size: .9rem; margin-left: 4px;">
-                                {{this.likes}} curtidas
+                                {{this.curtidas}} curtidas
                             </span>
                         </div>
 

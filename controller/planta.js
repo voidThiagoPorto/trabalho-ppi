@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const path = require("path");
 const fs = require("fs");
 const Sequelize = require("sequelize");
+const sequelize = require("../db");
 
 const FILE_TYPE_ERROR = 1;
 
@@ -52,27 +53,18 @@ async function index(req, res, next) {
     //     raw: true
     //  })
 
-    const plantas = await Planta.findAll({
-        attributes: {
-            include: [
-                [Sequelize.fn("COUNT", Sequelize.col("Usuarios.id")), "likes"],
-            ]
-        },
-        include: [
-            {
-                model: Usuario,
-                attributes: ["id"],
-                through: { attributes: [] }
-            }
-        ],
-        group: ["Planta.id", "Usuarios.id"],
-        raw: true
-    });
+    const plantas = await Planta.findAll({ raw: true });
+    var nCurtidas = plantas.map(async (entry) => {
+        entry["curtidas"] = await Curtida.count({ where: { plantumId: entry.id } });
+        if(req.isAuthenticated()){
+            entry["isCurtido"] = (await Curtida.count({ where: { plantumId: entry.id, usuarioId: req.user.id } }) != 0)
+        }
+        return await entry;
+    })
+    var fim = await Promise.all(nCurtidas);
 
 
-
-    res.send(plantas)
-    // res.render("planta/index", { plantas: plantas });
+    res.render("planta/index", { plantas: fim });
 }
 //
 async function create(req, res, next) {

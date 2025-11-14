@@ -1,5 +1,0 @@
-Title: colab-ppi
-Composition of slides: 
-	Firstly the purpose of the project was presented, which was connecting students and teachers so the transition to the programming course could be easier on the students, it was explained that the idea is to help people learn programming early on, so that evasion by getting frustrated with the classes is lower.
-	Then we were showed all the technical stuff like ER diagrams and the structure of the website like the login page and forum pages.
-	Overall the presentation was really good and well structured, it's a great tool for our school and i hope it gets integrated into our curriculum.

@@ -12,7 +12,6 @@ Usuario.belongsToMany(Planta, {
     through: "curtida",
 
 });
-
 module.exports = {
     Planta,
     Usuario,
