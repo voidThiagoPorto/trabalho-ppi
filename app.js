@@ -5,19 +5,27 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
-const handlebars = require("express-handlebars");
+const hbs = require("express-handlebars");
+const handlebars = hbs.create({
+  extname: ".hbs",
+  helpers: {
+    equalTo: (a, b) => a === b
+  }
+})
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 const cadastroRouter = require('./routes/cadastro');
 const plantaRouter = require('./routes/plantas');
+const curtidaRouter = require('./routes/curtida');
+
 
 
 var app = express();
 
 // view engine setup
-app.engine(".hbs", handlebars.engine({extname: ".hbs"}));
+app.engine(".hbs", handlebars.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', ".hbs");
 
@@ -62,6 +70,7 @@ app.use('/user', authenticationMiddleware, usersRouter);
 app.use('/login', loginRouter);
 app.use('/cadastro', cadastroRouter);
 app.use('/planta', authenticationMiddleware, plantaRouter);
+app.use('/curtida', authenticationMiddleware, curtidaRouter);
 
 
 //passport authenticate("google")
@@ -70,7 +79,7 @@ app.get("/auth/google", passport.authenticate("google", {
     ["openid", "profile", "email"]
 }));
 app.get("/auth/google/callback", passport.authenticate("google",
-  {failureRedirect: "/login" }), (req, res) => {
+  { failureRedirect: "/login" }), (req, res) => {
     //successful authentication, redirect home
     res.redirect('/');
   });

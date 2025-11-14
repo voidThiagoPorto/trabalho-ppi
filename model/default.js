@@ -1,12 +1,21 @@
 let Planta = require("./planta");
 let Usuario = require("./usuario");
+const database = require('../db');
+const Sequelize = require('sequelize');
 
-Usuario.hasMany(Planta);
-Planta.belongsTo(Usuario);
-Planta.belongsToMany(Usuario, {through: "curtida"});
-Usuario.belongsToMany(Planta, {through: "curtida"});
+
+Planta.belongsToMany(Usuario, {
+    through: "curtida",
+
+});
+Usuario.belongsToMany(Planta, {
+    through: "curtida",
+
+});
 
 module.exports = {
     Planta,
-    Usuario
+    Usuario,
+    Curtida: database.models.curtida,
+    database
 }

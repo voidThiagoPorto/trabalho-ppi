@@ -14,20 +14,27 @@ module.exports = function (passport) {
     },
         async function (request, accessToken, refreshToken, profile, done) {
             try {
-                var user = await Usuario.findOne({where: {id: profile.id}});
-                if(!user){
+                var user = await Usuario.findOne({ where: { googleId: profile.id } });
+                if (!user) {
+                    const isEmailUsed = await Usuario.findOne({ where: { email: profile.email } });
+                    // const isNameUsed = await Usuario.findOne({ where: { nome: fields["nome"] } });
+                    if (isEmailUsed) {
+                        res.redirect("/cadastro?erro=1");
+                        return;
+                    }
                     user = await Usuario.create({
-                        id: profile.id,
                         nome: profile.displayName,
                         email: profile.emails[0].value,
-                        senha: null
+                        senha: null,
+                        googleId: profile.id,
+                        foto: profile.picture
                     })
                 }
-                return done(null, profile);
+                return done(null, user);
             } catch (err) {
                 return done(err, null);
             }
-            
+
         }
     ));
     //fodase
@@ -61,11 +68,16 @@ module.exports = function (passport) {
     passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'senha' },
         async (email, senha, done) => {
             try {
-                const user = await findUser(email);
+                const user = await Usuario.findOne({
+                    where: {
+                        googleId: null,
+                        email: email
+                    }
+                });
                 // usuário inexistente
                 if (!user) { return done(null, false) }
                 // comparando as senhas
-                if(user.senha === null){
+                if (user.senha === null) {
                     return done(null, false)
                 }
                 const isValid = bcrypt.compareSync(senha, user.senha);

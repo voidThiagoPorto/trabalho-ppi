@@ -1,22 +1,57 @@
-<!DOCTYPE html> <head>
-    <meta charset="UTF-8"> <title>Banco de dados com NodeJS e Express</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-   <body>
-    <div class="container">
-    <h2>Inserir novo Registo</h2>
-    <form action="/cadastro" method="POST">
-    <div class="form-group"> <label for="usr">Nome:</label>
-    <input type="text" class="form-control" name="nome">
+<main class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px; background-color: var(--card-color);">
+      <h4 class="text-center mb-3" style="color: var(--accent); font-family: var(--font-main);">Criar Conta</h4>
+
+      <form action="/cadastro" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label" style="color: var(--text-color); font-family: var(--font-main);">Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nome"
+            required
+            style="background-color: #1f3310; color: var(--text-color); border: 1px solid var(--accent); font-family: var(--font-main);"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="color: var(--text-color); font-family: var(--font-main);">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            required
+            style="background-color: #1f3310; color: var(--text-color); border: 1px solid var(--accent); font-family: var(--font-main);"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="color: var(--text-color); font-family: var(--font-main);">Senha</label>
+          <input
+            type="password"
+            class="form-control"
+            name="senha"
+            style="background-color: #1f3310; color: var(--text-color); border: 1px solid var(--accent); font-family: var(--font-main);"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" style="color: var(--text-color); font-family: var(--font-main);">Foto</label>
+          <input
+            type="file"
+            class="form-control"
+            name="foto"
+            accept="image/*"
+            required
+            style="background-color: #1f3310; color: var(--text-color); border: 1px solid var(--accent); font-family: var(--font-main);"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" style="font-family: var(--font-main);">Registrar</button>
+      </form>
+
+      <div class="text-center mt-3" style="font-family: var(--font-main); color: var(--accent-light);">
+        <a href="/login" class="text-decoration-none" style="color: var(--accent-light);">Já tem conta? Entrar</a>
+      </div>
     </div>
-    <div class="form-group"> <label for="usr">Email:</label>
-    <input type="Email" class="form-control" name="email">
-    </div>
-    <div class="form-group"> <label for="pwd">Senha:</label>
-    <input type="password" class="form-control" name="senha">
-    </div>
-   <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-    </div>
-   </body></html>
-   
+  </main>

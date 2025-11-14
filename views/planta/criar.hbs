@@ -1,22 +1,47 @@
-<form action="/planta/store" method="POST" enctype="multipart/form-data">
-  <label for="nomeCientifico">Nome Científico:</label><br>
-  <input type="text" id="nomeCientifico" name="nomeCientifico" required><br><br>
+<main class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4 "
+    style="background-color: var(--card-color); width: 100%; max-width: 500px; border-radius: 15px;">
+    <h4 class="text-center mb-4" style="color: var(--accent); font-size: 1.8rem;">
+      {{#if edit}}Editar Planta{{else}}Cadastrar Planta{{/if}}
+    </h4>
 
-  <label for="nomeComum">Nome Comum:</label><br>
-  <input type="text" id="nomeComum" name="nomeComum" required><br><br>
+    <form action="/planta/{{#if edit}}update{{else}}store{{/if}}" method="POST" enctype="multipart/form-data">
+      <div>
+        <label for="nomeCientifico">Nome Científico</label>
+        <input type="text" id="nomeCientifico" name="nomeCientifico" value="{{post.nomeCientifico}}" required>
+      </div>
 
-  <fieldset>
-    <legend>Guia</legend>
+      <div>
+        <label for="nomeComum">Nome Comum</label>
+        <input type="text" id="nomeComum" name="nomeComum" value="{{post.nomeComum}}" required>
+      </div>
 
-    <label for="guiaTexto">Escrever guia:</label><br>
-    <textarea id="guiaTexto" name="guiaTexto" rows="5" cols="40" placeholder="Digite o conteúdo do guia aqui..."></textarea><br><br>
+      <div>
+        <label for="guiaArquivo">Guia</label>
+        <input type="file" id="guiaArquivo" name="guiaArquivo" accept=".txt">
+        <p class="text-center mt-2">ou</p>
+        <textarea name="guiaTexto" placeholder="Digite o conteúdo do guia">{{guia}}</textarea>
+      </div>
 
-    <label for="guiaArquivo">Ou enviar arquivo (.txt):</label><br>
-    <input type="file" id="guiaArquivo" name="guiaArquivo" accept=".txt"><br>
-  </fieldset><br>
+      <div>
+        <label for="foto">Foto</label>
+        <input type="file" id="foto" name="foto" accept="image/*">
+        {{#if post.foto}}
+        <img src="/imagem/{{post.foto}}" alt="Foto da planta"
+          style="max-width: 120px; border-radius: 8px; box-shadow: 0 0 15px rgba(122, 163, 92, 0.5); margin-top: 0.5rem;">
+        {{/if}}
+      </div>
 
-  <label for="foto">Foto:</label><br>
-  <input type="file" id="foto" name="foto" accept="image/*" required><br><br>
+      {{#if edit}}
+        <input type="hidden" value="{{post.id}}" name="postId" id="postId">
+      {{/if}}
 
-  <button type="submit">Salvar</button>
-</form>
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">
+          {{#if edit}}Atualizar{{else}}Cadastrar{{/if}}
+        </button>
+      </div>
+    </form>
+
+  </div>
+</main>

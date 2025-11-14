@@ -1,9 +1,102 @@
-{{#each plantas}}
+{{!-- {{#each plantas}}
 {{this.id}}
 {{this.nomeCientifico}}
 {{this.nomeComum}}
-<object data="/txt/{{this.guia}}.txt" width="300" height="200">
+<object data="/txt/{{this.guia}}" width="300" height="200">
     Not supported
 </object>
+usuarioId: {{this.usuarioId}}
+user.id: {{../user.id}}
+
+{{#if (equalTo this.usuarioId ../user.id)}}
+<a href="/planta/edit/{{this.id}}">edit</a>
+<a href="/planta/remove/{{this.id}}">remove</a>
+{{/if}}
 <br>
-{{/each}}
+{{/each}} --}}
+
+<div class="container py-5">
+    <h1 class="mb-4 text-center" style="color: var(--accent-light);">
+        🌿 Plantas da Comunidade
+    </h1>
+
+    <div class="row g-4 justify-content-center">
+
+        {{#each plantas}}
+
+        <div class="col-md-4 col-sm-6">
+            <div class="card h-100" style="
+                background: var(--card-color);
+                border: 1px solid var(--accent);
+                color: var(--text-color);
+                border-radius: 12px;
+            ">
+                <img src="/imagem/{{this.foto}}" class="card-img-top"
+                    style="border-bottom: 1px solid var(--accent); object-fit: cover; height: 200px;"
+                    alt="foto da planta">
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="card-title" style="color: var(--accent-light);">
+                        {{this.nomeComum}}
+                    </h5>
+
+                    <p class="card-text">
+                        <strong>Nome científico:</strong><br>
+                        <span style="color: var(--accent-light); font-size: .9rem;">
+                            {{this.nomeCientifico}}
+                        </span>
+                    </p>
+
+                    <p class="card-text mb-2">
+                        <strong>Guia:</strong>
+                    </p>
+
+                    <object data="/txt/{{this.guia}}" height="120"
+                        style="width: 100%; border-radius: 6px; border: 1px solid var(--accent-light); background:#0002;">
+                        <p class="text-center">Não suportado.</p>
+                    </object>
+
+                    <!-- ACTIONS -->
+                    <div class="mt-auto">
+
+                        <!-- LIKE BUTTON -->
+                        <div class="my-2">
+                            {{#if this.hasLiked}}
+                            <a href="/curtida/remover/{{this.id}}" class="btn btn-sm"
+                                style="color: #ff7373; font-size: 1.3rem;">
+                                ♥
+                            </a>
+                            {{else}}
+                            <a href="/curtida/adicionar/{{this.id}}" class="btn btn-sm"
+                                style="color: var(--accent-light); font-size: 1.3rem;">
+                                ♡
+                            </a>
+                            {{/if}}
+
+                            <span style="font-size: .9rem; margin-left: 4px;">
+                                {{this.likes}} curtidas
+                            </span>
+                        </div>
+
+                        <!-- OWNER ACTIONS -->
+                        {{#if (equalTo this.usuarioId ../user.id)}}
+                        <div class="mt-2">
+                            <a href="/planta/edit/{{this.id}}" class="btn btn-primary btn-sm w-100 mb-2">
+                                Editar
+                            </a>
+                            <a href="/planta/remove/{{this.id}}" class="btn btn-outline-danger btn-sm w-100">
+                                Remover
+                            </a>
+                        </div>
+                        {{/if}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {{/each}}
+    </div>
+</div>
+
