@@ -4,8 +4,11 @@
       <h1>Bem-vindo ao <span>Digital Garden</span> 🌿</h1>
       <p>Um sistema inspirado na natureza — sustentável, seguro e elegante.</p>
       <div class="actions">
+        {{#unless user }}
         <a href="/login" class="btn btn-primary">Entrar</a>
         <a href="/cadastro" class="btn btn-outline">Cadastrar</a>
+                {{/unless}}
+
       </div>
     </div>
     <div class="intro-img">

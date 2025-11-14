@@ -255,3 +255,27 @@ button.btn-primary {
 button.btn-primary:hover {
   background-color: var(--accent-light);
 }
+.user-icon {
+    font-size: 1.6rem !important;
+    color: var(--text-color) !important;
+}
+
+/* Não deixe o flexbox da navbar afetar o dropdown */
+.user-dropdown {
+    position: relative;
+}
+
+/* Força o dropdown a se comportar como Bootstrap */
+.user-dropdown .dropdown-menu {
+    display: none; /* Garantir que começa escondido */
+    position: absolute !important;
+    right: 0 !important;
+    left: auto !important;
+    background-color: var(--card-color);
+    border: 1px solid var(--accent);
+}
+
+/* Quando aberto */
+.user-dropdown.show .dropdown-menu {
+    display: block !important;
+}
